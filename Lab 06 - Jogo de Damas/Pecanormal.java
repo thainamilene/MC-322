@@ -5,24 +5,29 @@ public class Pecanormal extends Pecagenerica{
 	}
 	boolean verificacaoLance(int linhafinal, int colunafinal, Tabuleiro tabuleiro){
 		if (tabuleiro.tabuleiro[linhafinal][colunafinal].estado == false){ //verifica se o destino final esta vazio
-			if((linha-linhafinal) == (coluna-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
-				if (linha-linhafinal < 0){ //esta indo para frente
+			if((linha-linhafinal)*(linha-linhafinal) == (coluna-colunafinal)*(coluna-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
+				if((linha-linhafinal==1 && tabuleiro.tabuleiro[linha][coluna].cor == 'B') || (linha-linhafinal==-1 && tabuleiro.tabuleiro[linha][coluna].cor == 'P')){
+					return false;
+				}
+				if ((linha-linhafinal) < 0){ //esta indo para frente
 					if (coluna-colunafinal < 0){ //esta indo para a direita
 						for (int i=0; i<linhafinal-linha; i++) {
-							if(i%2 == 0 && tabuleiro.tabuleiro[linha+1][coluna+1].estado == true && tabuleiro.tabuleiro[linha+1][coluna+1].cor == cor){
+							if(i%2 == 0 && tabuleiro.tabuleiro[linha+i+1][coluna+i+1].estado == true && tabuleiro.tabuleiro[linha+i+1][coluna+i+1].cor == cor){
+								System.out.println(i);
+								System.out.println("im here " + (linha) + " " + (coluna) + " " + estado + " " + tabuleiro.tabuleiro[linha+i+1][coluna+i+1].cor );
 								return false;
 							} 
-							else if (i%2 == 1 && tabuleiro.tabuleiro[linha+1][coluna+1].estado == true){
+							else if (i%2 == 1 && (tabuleiro.tabuleiro[linha+i+1][coluna+i+1].estado == true || tabuleiro.tabuleiro[linha+i][coluna+i].estado == false)){
 								return false;
 							}
 						}
 					}
 					else{ //esta indo para a esquerda
 						for (int i=0; i<linhafinal-linha; i++) {
-							if(i%2 == 0 && tabuleiro.tabuleiro[linha+1][coluna-1].estado == true && tabuleiro.tabuleiro[linha+1][coluna-1].cor == cor){
+							if(i%2 == 0 && tabuleiro.tabuleiro[linha+i+1][coluna-i-1].estado == true && tabuleiro.tabuleiro[linha+i+1][coluna-i-1].cor == cor){
 								return false;
 							} 
-							else if (i%2 == 1 && tabuleiro.tabuleiro[linha+1][coluna-1].estado == true){
+							else if (i%2 == 1 && (tabuleiro.tabuleiro[linha+i+1][coluna-i-1].estado == true || tabuleiro.tabuleiro[linha+i][coluna-i].estado == false)){
 								return false;
 							}
 						}
@@ -31,26 +36,32 @@ public class Pecanormal extends Pecagenerica{
 				else{ // esta indo para tras
 					if (coluna-colunafinal < 0){ //esta indo para a direita
 						for (int i=0; i<linhafinal-linha; i++) {
-							if(i%2 == 0 && tabuleiro.tabuleiro[linha-1][coluna+1].estado == true && tabuleiro.tabuleiro[linha-1][coluna+1].cor == cor){
+							if(i%2 == 0 && tabuleiro.tabuleiro[linha-i-1][coluna+i+1].estado == true && tabuleiro.tabuleiro[linha-i-1][coluna+i+1].cor == cor){
 								return false;
 							} 
-							else if (i%2 == 1 && tabuleiro.tabuleiro[linha-1][coluna+1].estado == true){
+							else if (i%2 == 1 && (tabuleiro.tabuleiro[linha-i-1][coluna+i+1].estado == true || tabuleiro.tabuleiro[linha-i][coluna+i].estado == false)){
 								return false;
 							}
 						}
 					}
 					else{ //esta indo para a esquerda
 						for (int i=0; i<linhafinal-linha; i++) {
-							if(i%2 == 0 && tabuleiro.tabuleiro[linha-1][coluna-1].estado == true && tabuleiro.tabuleiro[linha-1][coluna-1].cor == cor){
+							if(i%2 == 0 && tabuleiro.tabuleiro[linha-i-1][coluna-i-1].estado == true && tabuleiro.tabuleiro[linha-i-1][coluna-i-1].cor == cor){
 								return false;
 							} 
-							else if (i%2 == 1 && tabuleiro.tabuleiro[linha-1][coluna-1].estado == true){
+							else if (i%2 == 1 && (tabuleiro.tabuleiro[linha-i-1][coluna-i-1].estado == true|| tabuleiro.tabuleiro[linha-i][coluna-i].estado == false)){
 								return false;
 							}
 						}
 					}
 				}	
 			}
+			else{
+				return false;
+			}
+		} 
+		else{
+			return false;
 		}
 	return true;
 	}	

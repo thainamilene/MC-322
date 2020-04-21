@@ -69,6 +69,56 @@ public class Tabuleiro{
 		return;
 	}
 
+	void movimentopecaNormal(int linhainicial, int colunainicial, int linhafinal, int colunafinal){
+		if((linhainicial-linhafinal) * (linhainicial-linhafinal) == (colunainicial-colunafinal)*(colunainicial-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
+				tabuleiro[linhafinal][colunafinal].estado = true;
+				tabuleiro[linhafinal][colunafinal].cor = tabuleiro[linhainicial][colunainicial].cor;
+				tabuleiro[linhafinal][colunafinal].pNormal = true;
+				if(tabuleiro[linhafinal][colunafinal].saidaN == null){
+					tabuleiro[linhafinal][colunafinal].saidaN = new Pecanormal(tabuleiro[linhafinal][colunafinal].cor, tabuleiro[linhafinal][colunafinal].estado, tabuleiro[linhafinal][colunafinal].linha, tabuleiro[linhafinal][colunafinal].coluna, tabuleiro[linhafinal][colunafinal].pNormal, tabuleiro[linhafinal][colunafinal].pDama);
+				}
+				tabuleiro[linhainicial][colunainicial].estado = false;
+				tabuleiro[linhainicial][colunainicial].pNormal = false;
+				if ((linhainicial-linhafinal) < 0){ //esta indo para frente
+					if (colunainicial-colunafinal < 0){ //esta indo para a direita
+						for (int i=0; i<linhafinal-linhainicial; i++) {
+							if(i%2 == 1){
+								tabuleiro[linhainicial+i+1][colunainicial+i+1].estado = false;
+								tabuleiro[linhainicial+i+1][colunainicial+i+1].pNormal = false;
+							}
+						}
+					}
+					else{ //esta indo para a esquerda
+						for (int i=0; i<linhafinal-linhainicial; i++) {
+							if (i%2 == 1){
+								tabuleiro[linhainicial+i+1][colunainicial-i-1].estado = false;
+								tabuleiro[linhainicial+i+1][colunainicial-i-1].pNormal = false;
+							}
+						}
+					} 
+				}
+				else{ // esta indo para tras
+					if (colunainicial-colunafinal < 0){ //esta indo para a direita
+						for (int i=0; i<linhafinal-linhainicial; i++) {
+							if (i%2 == 1){
+								tabuleiro[linhainicial-i-1][colunainicial+i+1].estado = false;
+								tabuleiro[linhainicial-i-1][colunainicial+i+1].pNormal = false;
+							}
+						}
+					}
+					else{ //esta indo para a esquerda
+						for (int i=0; i<linhafinal-linhainicial; i++) {
+							if (i%2 == 1){
+								tabuleiro[linhainicial-i-1][colunainicial-i-1].estado = false;
+								tabuleiro[linhainicial-i-1][colunainicial-i-1].pNormal = false;
+							}
+						}
+					}
+				}	
+			}
+			Imprimir();
+	}
+
 	void Imprimir(){
 		for(int i=8; i>0; i--){
 				System.out.print (i); 				

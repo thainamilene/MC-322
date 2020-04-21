@@ -13,5 +13,7 @@ public class Pecagenerica{
 		this.estado = estado;
 		this.linha = linha;
 		this.coluna = coluna;
+		this.pNormal = pNormal;
+		this.pDama = pDama;
 	}
 }
