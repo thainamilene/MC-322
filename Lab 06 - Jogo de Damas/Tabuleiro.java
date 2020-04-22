@@ -74,6 +74,8 @@ public class Tabuleiro{
 				tabuleiro[linhafinal][colunafinal].estado = true;
 				tabuleiro[linhafinal][colunafinal].cor = tabuleiro[linhainicial][colunainicial].cor;
 				tabuleiro[linhafinal][colunafinal].pNormal = true;
+				tabuleiro[linhafinal][colunafinal].linha = linhafinal;
+				tabuleiro[linhafinal][colunafinal].coluna = colunafinal;
 				if(tabuleiro[linhafinal][colunafinal].saidaN == null){
 					tabuleiro[linhafinal][colunafinal].saidaN = new Pecanormal(tabuleiro[linhafinal][colunafinal].cor, tabuleiro[linhafinal][colunafinal].estado, tabuleiro[linhafinal][colunafinal].linha, tabuleiro[linhafinal][colunafinal].coluna, tabuleiro[linhafinal][colunafinal].pNormal, tabuleiro[linhafinal][colunafinal].pDama);
 				}
