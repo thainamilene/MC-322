@@ -5,6 +5,7 @@ public class Pecanormal extends Pecagenerica{
 	}
 	boolean verificacaoLance(int linhafinal, int colunafinal, Tabuleiro tabuleiro){
 		if (tabuleiro.tabuleiro[linhafinal][colunafinal].estado == false){ //verifica se o destino final esta vazio
+							System.out.println("im here" + linha + coluna);
 			if((linha-linhafinal)*(linha-linhafinal) == (coluna-colunafinal)*(coluna-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
 				if((linha-linhafinal==1 && tabuleiro.tabuleiro[linha][coluna].cor == 'B') || (linha-linhafinal==-1 && tabuleiro.tabuleiro[linha][coluna].cor == 'P')){//verifica se caso a peça ande uma casa apenas, ela está indo para sua respectiva frente
 					return false;
@@ -14,6 +15,7 @@ public class Pecanormal extends Pecagenerica{
 						return false;
 					}
 					else{
+						tabuleiro.movimentopecaNormal(linha, coluna, linhafinal, colunafinal);
 						return true;
 					}
 				}
@@ -36,7 +38,6 @@ public class Pecanormal extends Pecagenerica{
 						}
 					} 
 					else{ //esta indo para a esquerda
-								System.out.println("im here " + (linha) + " " + (coluna) + " " + estado  );
 						if((tabuleiro.tabuleiro[linha-1][coluna-1].estado == true && tabuleiro.tabuleiro[linha-1][coluna-1].cor == tabuleiro.tabuleiro[linha][coluna].cor) || (tabuleiro.tabuleiro[linha-2][coluna-2].estado == true)){
 							return false;
 						} 
@@ -50,6 +51,7 @@ public class Pecanormal extends Pecagenerica{
 		else{
 			return false;
 		}
+	tabuleiro.movimentopecaNormal(linha, coluna, linhafinal, colunafinal);
 	return true;
 	}	
 }

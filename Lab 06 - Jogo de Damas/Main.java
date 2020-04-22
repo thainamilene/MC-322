@@ -20,8 +20,8 @@ class Main{
 		tabuleiro.tabuleiro[0][6] = new Pecagenerica('B', true, 0, 6, true, false);
 		tabuleiro.tabuleiro[1][1] = new Pecagenerica('B', true, 1, 1, true, false);
 		tabuleiro.tabuleiro[1][3] = new Pecagenerica('B', true, 1, 3, true, false);
-		tabuleiro.tabuleiro[1][5] = new Pecagenerica('B', true, 1, 4, true, false);
-		tabuleiro.tabuleiro[1][7] = new Pecagenerica('B', true, 1, 5, true, false);
+		tabuleiro.tabuleiro[1][5] = new Pecagenerica('B', true, 1, 5, true, false);
+		tabuleiro.tabuleiro[1][7] = new Pecagenerica('B', true, 1, 7, true, false);
 		tabuleiro.tabuleiro[2][0] = new Pecagenerica('B', true, 2, 0, true, false);
 		tabuleiro.tabuleiro[2][2] = new Pecagenerica('B', true, 2, 2, true, false);
 		tabuleiro.tabuleiro[2][4] = new Pecagenerica('B', true, 2, 4, true, false);
@@ -92,9 +92,6 @@ class Main{
 				if(tabuleiro.tabuleiro[iini][jini].estado == true && tabuleiro.tabuleiro[ifim][jfim].estado == false){
 					if (tabuleiro.tabuleiro[iini][jini].pNormal == true ){
 						verificacao = tabuleiro.tabuleiro[iini][jini].saidaN.verificacaoLance(ifim,jfim,tabuleiro);
-						if (verificacao == true){
-							tabuleiro.movimentopecaNormal(iini, jini, ifim, jfim);
-						}
 					}
 					else{
 						verificacao = tabuleiro.tabuleiro[iini][jini].saidaD.verificacaoLance(ifim,jfim,tabuleiro);

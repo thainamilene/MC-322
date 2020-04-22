@@ -5,30 +5,81 @@ public class Dama extends Pecagenerica{
 	}
 
 	boolean verificacaoLance(int linhafinal, int colunafinal, Tabuleiro tabuleiro){
-		/*if (tabuleiro.tabuleiro[linhafinal][colunafinal].estado == false){ //verifica se o destino final esta vazio
-			//System.out.println("im here " + (linha) + " " + (coluna) + " " + estado);
-			if((linha-linhafinal) == (coluna-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
+		if (tabuleiro.tabuleiro[linhafinal][colunafinal].estado == false){ //verifica se o destino final esta vazio
+			if((linha-linhafinal)*(linha-linhafinal) == (coluna-colunafinal)*(coluna-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
 				if ((linha-linhafinal) < 0){ //esta indo para frente
 					if (coluna-colunafinal < 0){ //esta indo para a direita
-						for (int i=0; i<linhafinal-linha; i++) {
-							
+						int i=0;
+						while(i<(linhafinal-linha)){
+							if(tabuleiro.tabuleiro[linha+i+1][coluna+i+1].estado==true && tabuleiro.tabuleiro[linha+i+1][coluna+i+1].cor == tabuleiro.tabuleiro[linha][coluna].cor){
+								return false;
+							}
+							if(tabuleiro.tabuleiro[linha+i+1][coluna+i+1].estado==true && tabuleiro.tabuleiro[linha+i+1][coluna+i+1].cor != tabuleiro.tabuleiro[linha][coluna].cor){
+								if(tabuleiro.tabuleiro[linha+i+2][coluna+i+2].estado==true){
+									return false;
+								}
+								if(tabuleiro.tabuleiro[linha+i+1][coluna+i+1] == tabuleiro.tabuleiro[linhafinal][colunafinal]){
+									tabuleiro.movimentoDama(linha, coluna, linhafinal, colunafinal);
+									return true;
+								}
+							}
+							i++;
 						}
 					}
 					else{ //esta indo para a esquerda
-						for (int i=0; i<linhafinal-linha; i++) {
-							
-
+						int i=0;
+						while(i<(linhafinal-linha)){
+							if(tabuleiro.tabuleiro[linha+i+1][coluna-i-1].estado==true && tabuleiro.tabuleiro[linha+i+1][coluna-i-1].cor == tabuleiro.tabuleiro[linha][coluna].cor){
+								return false;
+							}
+							if(tabuleiro.tabuleiro[linha+i+1][coluna-i-1].estado==true && tabuleiro.tabuleiro[linha+i+1][coluna-i-1].cor != tabuleiro.tabuleiro[linha][coluna].cor){
+								if(tabuleiro.tabuleiro[linha+i+2][coluna-i-2].estado==true){
+									return false;
+								}
+								if(tabuleiro.tabuleiro[linha+i+1][coluna-i-1] == tabuleiro.tabuleiro[linhafinal][colunafinal]){
+									tabuleiro.movimentoDama(linha, coluna, linhafinal, colunafinal);
+									return true;
+								}
+							}
+							i++;
+						}
 					} 
 				}
 				else{ // esta indo para tras
 					if (coluna-colunafinal < 0){ //esta indo para a direita
-						for (int i=0; i<linhafinal-linha; i++) {
-							
+						int i=0;
+						while(i<(linha-linhafinal)){
+							if(tabuleiro.tabuleiro[linha-i-1][coluna+i+1].estado==true && tabuleiro.tabuleiro[linha-i-1][coluna+i+1].cor == tabuleiro.tabuleiro[linha][coluna].cor){
+								return false;
+							}
+							if(tabuleiro.tabuleiro[linha-i-1][coluna+i+1].estado==true && tabuleiro.tabuleiro[linha-i-1][coluna+i+1].cor != tabuleiro.tabuleiro[linha][coluna].cor){
+								if(tabuleiro.tabuleiro[linha-i-2][coluna+i+2].estado==true){
+									return false;
+								}
+								if(tabuleiro.tabuleiro[linha-i-1][coluna+i+1] == tabuleiro.tabuleiro[linhafinal][colunafinal]){
+									tabuleiro.movimentoDama(linha, coluna, linhafinal, colunafinal);
+									return true;
+								}
+							}
+							i++;
 						}
-					}
+					} 
 					else{ //esta indo para a esquerda
-						for (int i=0; i<linhafinal-linha; i++) {
-
+						int i=0;
+						while(i<(linha-linhafinal)){
+							if(tabuleiro.tabuleiro[linha-i-1][coluna-i-1].estado==true && tabuleiro.tabuleiro[linha-i-1][coluna-i-1].cor == tabuleiro.tabuleiro[linha][coluna].cor){
+								return false;
+							}
+							if(tabuleiro.tabuleiro[linha-i-1][coluna-i-1].estado==true && tabuleiro.tabuleiro[linha-i-1][coluna-i-1].cor != tabuleiro.tabuleiro[linha][coluna].cor){
+								if(tabuleiro.tabuleiro[linha-i-2][coluna-i-2].estado==true){
+									return false;
+								}
+								if(tabuleiro.tabuleiro[linha-i-1][coluna-i-1] == tabuleiro.tabuleiro[linhafinal][colunafinal]){
+									tabuleiro.movimentoDama(linha, coluna, linhafinal, colunafinal);
+									return true;
+								}
+							}
+							i++;
 						}
 					}
 				}	
@@ -39,7 +90,8 @@ public class Dama extends Pecagenerica{
 		} 
 		else{
 			return false;
-		}*/
+		}
+	tabuleiro.movimentoDama(linha, coluna, linhafinal, colunafinal);
 	return true;
 	}	
 }

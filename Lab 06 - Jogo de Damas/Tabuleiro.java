@@ -44,10 +44,12 @@ public class Tabuleiro{
 	}
 
 	void movimentopecaNormal(int linhainicial, int colunainicial, int linhafinal, int colunafinal){
+		boolean v = false;
 		if((linhainicial-linhafinal) * (linhainicial-linhafinal) == (colunainicial-colunafinal)*(colunainicial-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
 			tabuleiro[linhafinal][colunafinal].estado = true;
 			tabuleiro[linhafinal][colunafinal].cor = tabuleiro[linhainicial][colunainicial].cor;
 			tabuleiro[linhafinal][colunafinal].pNormal = true;
+			tabuleiro[linhafinal][colunafinal].pDama = false;
 			tabuleiro[linhafinal][colunafinal].linha = linhafinal;
 			tabuleiro[linhafinal][colunafinal].coluna = colunafinal;
 			if(tabuleiro[linhafinal][colunafinal].saidaN == null){
@@ -57,34 +59,99 @@ public class Tabuleiro{
 			tabuleiro[linhainicial][colunainicial].pNormal = false;
 			tabuleiro[linhainicial][colunainicial].cor = '-';
 			if(linhainicial-linhafinal==1 || linhainicial-linhafinal==-1){
-				Imprimir();
-				return;
+				v = true;
 			}
-			if ((linhainicial-linhafinal) < 0){ //esta indo para frente
-				if (colunainicial-colunafinal < 0){ //esta indo para a direita
-					tabuleiro[linhainicial+1][colunainicial+1].estado = false;
-					tabuleiro[linhainicial+1][colunainicial+1].pNormal = false;
-					tabuleiro[linhainicial+1][colunainicial+1].cor = '-';
+			if (v==false){
+				if ((linhainicial-linhafinal) < 0){ //esta indo para frente
+					if (colunainicial-colunafinal < 0){ //esta indo para a direita
+						tabuleiro[linhainicial+1][colunainicial+1].estado = false;
+						tabuleiro[linhainicial+1][colunainicial+1].pNormal = false;
+						tabuleiro[linhainicial+1][colunainicial+1].pDama = false;
+						tabuleiro[linhainicial+1][colunainicial+1].cor = '-';
+					}
+					else{ //esta indo para a esquerda
+						tabuleiro[linhainicial+1][colunainicial-1].estado = false;
+						tabuleiro[linhainicial+1][colunainicial-1].pNormal = false;
+						tabuleiro[linhainicial+1][colunainicial-1].pDama = false;
+						tabuleiro[linhainicial+1][colunainicial-1].cor = '-';
+					} 
 				}
-				else{ //esta indo para a esquerda
-					tabuleiro[linhainicial+1][colunainicial-1].estado = false;
-					tabuleiro[linhainicial+1][colunainicial-1].pNormal = false;
-					tabuleiro[linhainicial+1][colunainicial-1].cor = '-';
-				} 
+				else{ // esta indo para tras
+					if (colunainicial-colunafinal < 0){ //esta indo para a direita
+						tabuleiro[linhainicial-1][colunainicial+1].estado = false;
+						tabuleiro[linhainicial-1][colunainicial+1].pNormal = false;
+						tabuleiro[linhainicial-1][colunainicial+1].pDama = false;
+						tabuleiro[linhainicial-1][colunainicial+1].cor = '-';
+					} 
+					else{ //esta indo para a esquerda
+						tabuleiro[linhainicial-1][colunainicial-1].estado = false;
+						tabuleiro[linhainicial-1][colunainicial-1].pNormal = false;
+						tabuleiro[linhainicial-1][colunainicial-1].pDama = false;
+						tabuleiro[linhainicial-1][colunainicial-1].cor = '-';
+					}
+				}	
 			}
-			else{ // esta indo para tras
-				if (colunainicial-colunafinal < 0){ //esta indo para a direita
-					tabuleiro[linhainicial-1][colunainicial+1].estado = false;
-					tabuleiro[linhainicial-1][colunainicial+1].pNormal = false;
-					tabuleiro[linhainicial-1][colunainicial+1].cor = '-';
-				} 
-				else{ //esta indo para a esquerda
-					tabuleiro[linhainicial-1][colunainicial-1].estado = false;
-					tabuleiro[linhainicial-1][colunainicial-1].pNormal = false;
-					tabuleiro[linhainicial-1][colunainicial-1].cor = '-';
-				}
-			}	
 		}
+		if((tabuleiro[linhafinal][colunafinal].linha==0 && tabuleiro[linhafinal][colunafinal].cor=='P') || (tabuleiro[linhafinal][colunafinal].linha==7 && tabuleiro[linhafinal][colunafinal].cor=='B')){ //transforma em Dama
+			tabuleiro[linhafinal][colunafinal].pNormal = false;
+			tabuleiro[linhafinal][colunafinal].pDama = true;
+			tabuleiro[linhafinal][colunafinal].saidaN = null;
+			if(tabuleiro[linhafinal][colunafinal].saidaD == null){
+				tabuleiro[linhafinal][colunafinal].saidaD = new Dama(tabuleiro[linhafinal][colunafinal].cor, tabuleiro[linhafinal][colunafinal].estado, tabuleiro[linhafinal][colunafinal].linha, tabuleiro[linhafinal][colunafinal].coluna, tabuleiro[linhafinal][colunafinal].pNormal, tabuleiro[linhafinal][colunafinal].pDama);
+			}
+		}
+		Imprimir();
+	}
+
+	void movimentoDama(int linhainicial, int colunainicial, int linhafinal, int colunafinal){
+		tabuleiro[linhafinal][colunafinal].estado = true;
+		tabuleiro[linhafinal][colunafinal].cor = tabuleiro[linhainicial][colunainicial].cor;
+		tabuleiro[linhafinal][colunafinal].pDama = true;
+		tabuleiro[linhafinal][colunafinal].pNormal = false;
+		tabuleiro[linhafinal][colunafinal].linha = linhafinal;
+		tabuleiro[linhafinal][colunafinal].coluna = colunafinal;
+		if(tabuleiro[linhafinal][colunafinal].saidaD == null){
+			tabuleiro[linhafinal][colunafinal].saidaD = new Dama(tabuleiro[linhafinal][colunafinal].cor, tabuleiro[linhafinal][colunafinal].estado, tabuleiro[linhafinal][colunafinal].linha, tabuleiro[linhafinal][colunafinal].coluna, tabuleiro[linhafinal][colunafinal].pNormal, tabuleiro[linhafinal][colunafinal].pDama);
+		}
+		tabuleiro[linhainicial][colunainicial].estado = false;
+		tabuleiro[linhainicial][colunainicial].pDama = false;
+		tabuleiro[linhainicial][colunainicial].cor = '-';
+		if ((linhainicial-linhafinal) < 0){ //esta indo para frente
+			if (colunainicial-colunafinal < 0){ //esta indo para a direita
+				if(tabuleiro[linhafinal-1][colunafinal-1].estado == true){
+					tabuleiro[linhafinal-1][colunafinal-1].estado = false;
+					tabuleiro[linhafinal-1][colunafinal-1].pNormal = false;
+					tabuleiro[linhafinal-1][colunafinal-1].pDama = false;
+					tabuleiro[linhafinal-1][colunafinal-1].cor = '-';
+				}
+			}
+			else{ //esta indo para a esquerda
+				if(tabuleiro[linhafinal-1][colunafinal+1].estado == true){
+					tabuleiro[linhafinal-1][colunafinal+1].estado = false;
+					tabuleiro[linhafinal-1][colunafinal+1].pNormal = false;
+					tabuleiro[linhafinal-1][colunafinal+1].pDama = false;
+					tabuleiro[linhafinal-1][colunafinal+1].cor = '-';
+				}
+			} 
+		}
+		else{ // esta indo para tras
+			if (colunainicial-colunafinal < 0){ //esta indo para a direita
+				if(tabuleiro[linhafinal+1][colunafinal-1].estado == true){
+					tabuleiro[linhafinal+1][colunafinal-1].estado = false;
+					tabuleiro[linhafinal+1][colunafinal-1].pNormal = false;
+					tabuleiro[linhafinal+1][colunafinal-1].pDama = false;
+					tabuleiro[linhafinal+1][colunafinal-1].cor = '-';
+				}
+			} 
+			else{ //esta indo para a esquerda
+				if(tabuleiro[linhafinal+1][colunafinal+1].estado == true){
+					tabuleiro[linhafinal+1][colunafinal+1].estado = false;
+					tabuleiro[linhafinal+1][colunafinal+1].pNormal = false;
+					tabuleiro[linhafinal+1][colunafinal+1].pDama = false;
+					tabuleiro[linhafinal+1][colunafinal+1].cor = '-';
+				}
+			}
+		}	
 		Imprimir();
 	}
 
