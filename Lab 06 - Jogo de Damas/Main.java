@@ -1,32 +1,33 @@
 class Main{
 	static void criarpecas(Tabuleiro tabuleiro){
-		Pecagenerica P1 = new Pecagenerica('P', true, 7, 1, true, false);
-		Pecagenerica P2 = new Pecagenerica('P', true, 7, 3, true, false);
-		Pecagenerica P3 = new Pecagenerica('P', true, 7, 5, true, false);
-		Pecagenerica P4 = new Pecagenerica('P', true, 7, 7, true, false);
-		Pecagenerica P5 = new Pecagenerica('P', true, 6, 0, true, false);
-		Pecagenerica P6 = new Pecagenerica('P', true, 6, 2, true, false);
-		Pecagenerica P7 = new Pecagenerica('P', true, 6, 4, true, false);
-		Pecagenerica P8 = new Pecagenerica('P', true, 6, 6, true, false);
-		Pecagenerica P9 = new Pecagenerica('P', true, 5, 1, true, false);
-		Pecagenerica P10 = new Pecagenerica('P', true, 5, 3, true, false);
-		Pecagenerica P11 = new Pecagenerica('P', true, 5, 5, true, false);
-		Pecagenerica P12 = new Pecagenerica('P', true, 5, 7, true, false);
-		
-		Pecagenerica B1 = new Pecagenerica('B', true, 0, 0, true, false);
-		Pecagenerica B2 = new Pecagenerica('B', true, 0, 2, true, false);
-		Pecagenerica B3 = new Pecagenerica('B', true, 0, 4, true, false);
-		Pecagenerica B4 = new Pecagenerica('B', true, 0, 6, true, false);
-		Pecagenerica B5 = new Pecagenerica('B', true, 1, 1, true, false);
-		Pecagenerica B6 = new Pecagenerica('B', true, 1, 3, true, false);
-		Pecagenerica B7 = new Pecagenerica('B', true, 1, 4, true, false);
-		Pecagenerica B8 = new Pecagenerica('B', true, 1, 5, true, false);
-		Pecagenerica B9 = new Pecagenerica('B', true, 2, 0, true, false);
-		Pecagenerica B10 = new Pecagenerica('B', true, 2, 2, true, false);
-		Pecagenerica B11 = new Pecagenerica('B', true, 2, 4, true, false);
-		Pecagenerica B12 = new Pecagenerica('B', true, 2, 6, true, false);
 
-		tabuleiro.Montar(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12);
+		tabuleiro.tabuleiro[7][1] = new Pecagenerica('P', true, 7, 1, true, false);
+		tabuleiro.tabuleiro[7][3] = new Pecagenerica('P', true, 7, 3, true, false);
+		tabuleiro.tabuleiro[7][5] = new Pecagenerica('P', true, 7, 5, true, false);
+		tabuleiro.tabuleiro[7][7] = new Pecagenerica('P', true, 7, 7, true, false);
+		tabuleiro.tabuleiro[6][0] = new Pecagenerica('P', true, 6, 0, true, false);
+		tabuleiro.tabuleiro[6][2] = new Pecagenerica('P', true, 6, 2, true, false);
+		tabuleiro.tabuleiro[6][4] = new Pecagenerica('P', true, 6, 4, true, false);
+		tabuleiro.tabuleiro[6][6] = new Pecagenerica('P', true, 6, 6, true, false);
+		tabuleiro.tabuleiro[5][1] = new Pecagenerica('P', true, 5, 1, true, false);
+		tabuleiro.tabuleiro[5][3] = new Pecagenerica('P', true, 5, 3, true, false);
+		tabuleiro.tabuleiro[5][5] = new Pecagenerica('P', true, 5, 5, true, false);
+		tabuleiro.tabuleiro[5][7] = new Pecagenerica('P', true, 5, 7, true, false);
+
+		tabuleiro.tabuleiro[0][0] = new Pecagenerica('B', true, 0, 0, true, false);
+		tabuleiro.tabuleiro[0][2] = new Pecagenerica('B', true, 0, 2, true, false);
+		tabuleiro.tabuleiro[0][4] = new Pecagenerica('B', true, 0, 4, true, false);
+		tabuleiro.tabuleiro[0][6] = new Pecagenerica('B', true, 0, 6, true, false);
+		tabuleiro.tabuleiro[1][1] = new Pecagenerica('B', true, 1, 1, true, false);
+		tabuleiro.tabuleiro[1][3] = new Pecagenerica('B', true, 1, 3, true, false);
+		tabuleiro.tabuleiro[1][5] = new Pecagenerica('B', true, 1, 4, true, false);
+		tabuleiro.tabuleiro[1][7] = new Pecagenerica('B', true, 1, 5, true, false);
+		tabuleiro.tabuleiro[2][0] = new Pecagenerica('B', true, 2, 0, true, false);
+		tabuleiro.tabuleiro[2][2] = new Pecagenerica('B', true, 2, 2, true, false);
+		tabuleiro.tabuleiro[2][4] = new Pecagenerica('B', true, 2, 4, true, false);
+		tabuleiro.tabuleiro[2][6] = new Pecagenerica('B', true, 2, 6, true, false);
+
+		tabuleiro.Montar();
 	}
 
 	static void jogada(String commands[], Tabuleiro tabuleiro){
@@ -77,6 +78,7 @@ class Main{
 			int ifim = Integer.parseInt(commands[i].substring(4,5));
 			iini--;
 			ifim--;
+						//	System.out.println("verificacao");
 			if(i==0){
 				if (tabuleiro.tabuleiro[iini][jini].cor == 'B'){
 					lance = 0;
@@ -91,7 +93,6 @@ class Main{
 					if (tabuleiro.tabuleiro[iini][jini].pNormal == true ){
 						verificacao = tabuleiro.tabuleiro[iini][jini].saidaN.verificacaoLance(ifim,jfim,tabuleiro);
 						if (verificacao == true){
-							System.out.println("verificacao");
 							tabuleiro.movimentopecaNormal(iini, jini, ifim, jfim);
 						}
 					}
@@ -99,6 +100,10 @@ class Main{
 						verificacao = tabuleiro.tabuleiro[iini][jini].saidaD.verificacaoLance(ifim,jfim,tabuleiro);
 					}
 				}
+			}
+			if(verificacao == false){
+				System.out.println("Jogada Inválida");
+				System.out.println(" ");
 			}
 			if (lance == 0) {
 				lance++;
