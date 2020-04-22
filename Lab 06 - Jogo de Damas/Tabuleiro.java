@@ -11,7 +11,7 @@ public class Tabuleiro{
 	}
 
 
-	void Montar(){
+	void montar(){
 			tabuleiro[7][1].saidaN = new Pecanormal(tabuleiro[7][1].cor, tabuleiro[7][1].estado, tabuleiro[7][1].linha, tabuleiro[7][1].coluna, tabuleiro[7][1].pNormal, tabuleiro[7][1].pDama);
 			tabuleiro[7][3].saidaN = new Pecanormal(tabuleiro[7][3].cor, tabuleiro[7][3].estado, tabuleiro[7][3].linha, tabuleiro[7][3].coluna, tabuleiro[7][3].pNormal, tabuleiro[7][3].pDama);
 			tabuleiro[7][5].saidaN = new Pecanormal(tabuleiro[7][5].cor, tabuleiro[7][5].estado, tabuleiro[7][5].linha, tabuleiro[7][5].coluna, tabuleiro[7][5].pNormal, tabuleiro[7][5].pDama);
@@ -39,11 +39,11 @@ public class Tabuleiro{
 			tabuleiro[2][6].saidaN = new Pecanormal(tabuleiro[2][6].cor, tabuleiro[2][6].estado, tabuleiro[2][6].linha, tabuleiro[2][6].coluna, tabuleiro[2][6].pNormal, tabuleiro[2][6].pDama);
 
 		System.out.println("Tabuleiro inicial:");
-		Imprimir();
+		imprimir();
 		return;
 	}
 
-	void movimentopecaNormal(int linhainicial, int colunainicial, int linhafinal, int colunafinal){
+	void movimentoPecaNormal(int linhainicial, int colunainicial, int linhafinal, int colunafinal){
 		boolean v = false;
 		if((linhainicial-linhafinal) * (linhainicial-linhafinal) == (colunainicial-colunafinal)*(colunainicial-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
 			tabuleiro[linhafinal][colunafinal].estado = true;
@@ -58,10 +58,10 @@ public class Tabuleiro{
 			tabuleiro[linhainicial][colunainicial].estado = false;
 			tabuleiro[linhainicial][colunainicial].pNormal = false;
 			tabuleiro[linhainicial][colunainicial].cor = '-';
-			if(linhainicial-linhafinal==1 || linhainicial-linhafinal==-1){
+			if(linhainicial-linhafinal==1 || linhainicial-linhafinal==-1){ //verifica se a peca anda apenas uma casa sem comer nenhuma peca
 				v = true;
 			}
-			if (v==false){
+			if (v==false){ //elimina a peca intermediaria se ela existir
 				if ((linhainicial-linhafinal) < 0){ //esta indo para frente
 					if (colunainicial-colunafinal < 0){ //esta indo para a direita
 						tabuleiro[linhainicial+1][colunainicial+1].estado = false;
@@ -92,7 +92,7 @@ public class Tabuleiro{
 				}	
 			}
 		}
-		if((tabuleiro[linhafinal][colunafinal].linha==0 && tabuleiro[linhafinal][colunafinal].cor=='P') || (tabuleiro[linhafinal][colunafinal].linha==7 && tabuleiro[linhafinal][colunafinal].cor=='B')){ //transforma em Dama
+		if((tabuleiro[linhafinal][colunafinal].linha==0 && tabuleiro[linhafinal][colunafinal].cor=='P') || (tabuleiro[linhafinal][colunafinal].linha==7 && tabuleiro[linhafinal][colunafinal].cor=='B')){ //transforma em Dama se puder
 			tabuleiro[linhafinal][colunafinal].pNormal = false;
 			tabuleiro[linhafinal][colunafinal].pDama = true;
 			tabuleiro[linhafinal][colunafinal].saidaN = null;
@@ -100,7 +100,7 @@ public class Tabuleiro{
 				tabuleiro[linhafinal][colunafinal].saidaD = new Dama(tabuleiro[linhafinal][colunafinal].cor, tabuleiro[linhafinal][colunafinal].estado, tabuleiro[linhafinal][colunafinal].linha, tabuleiro[linhafinal][colunafinal].coluna, tabuleiro[linhafinal][colunafinal].pNormal, tabuleiro[linhafinal][colunafinal].pDama);
 			}
 		}
-		Imprimir();
+		imprimir();
 	}
 
 	void movimentoDama(int linhainicial, int colunainicial, int linhafinal, int colunafinal){
@@ -152,10 +152,10 @@ public class Tabuleiro{
 				}
 			}
 		}	
-		Imprimir();
+		imprimir();
 	}
 
-	void Imprimir(){
+	void imprimir(){
 		for(int i=8; i>0; i--){
 				System.out.print (i); 				
 				System.out.print (' '); 				

@@ -3,19 +3,21 @@ public class Pecanormal extends Pecagenerica{
 	Pecanormal(char cor, boolean estado, int linha, int coluna, boolean pNormal, boolean pDama){
 		super(cor, estado, linha, coluna, pNormal, pDama);
 	}
-	boolean verificacaoLance(int linhafinal, int colunafinal, Tabuleiro tabuleiro){
+	boolean verificacaoLance(int linhafinal, int colunafinal, Tabuleiro tabuleiro, int cont){
 		if (tabuleiro.tabuleiro[linhafinal][colunafinal].estado == false){ //verifica se o destino final esta vazio
-							System.out.println("im here" + linha + coluna);
 			if((linha-linhafinal)*(linha-linhafinal) == (coluna-colunafinal)*(coluna-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
-				if((linha-linhafinal==1 && tabuleiro.tabuleiro[linha][coluna].cor == 'B') || (linha-linhafinal==-1 && tabuleiro.tabuleiro[linha][coluna].cor == 'P')){//verifica se caso a peça ande uma casa apenas, ela está indo para sua respectiva frente
+				if((linha-linhafinal==1 && tabuleiro.tabuleiro[linha][coluna].cor == 'B') || (linha-linhafinal==-1 && tabuleiro.tabuleiro[linha][coluna].cor == 'P')){//verifica se caso a peca ande uma casa apenas, ela esta indo para sua respectiva frente
 					return false;
 				}
-				else if(linha-linhafinal==1 || linha-linhafinal == -1){
-					if(tabuleiro.tabuleiro[linhafinal][colunafinal].estado==true){
+				else if(linha-linhafinal==1 || linha-linhafinal == -1){ // quando a peca anda apenas uma casa
+					if(cont>1){
+						return false;
+					}
+					if(tabuleiro.tabuleiro[linhafinal][colunafinal].estado==true){ //quando ha uma peca no lugar do destino
 						return false;
 					}
 					else{
-						tabuleiro.movimentopecaNormal(linha, coluna, linhafinal, colunafinal);
+						tabuleiro.movimentoPecaNormal(linha, coluna, linhafinal, colunafinal);
 						return true;
 					}
 				}
@@ -51,7 +53,7 @@ public class Pecanormal extends Pecagenerica{
 		else{
 			return false;
 		}
-	tabuleiro.movimentopecaNormal(linha, coluna, linhafinal, colunafinal);
+	tabuleiro.movimentoPecaNormal(linha, coluna, linhafinal, colunafinal);
 	return true;
 	}	
 }

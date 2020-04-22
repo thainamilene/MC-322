@@ -4,8 +4,11 @@ public class Dama extends Pecagenerica{
 		super(cor, estado, linha, coluna, pNormal, pDama);
 	}
 
-	boolean verificacaoLance(int linhafinal, int colunafinal, Tabuleiro tabuleiro){
+	boolean verificacaoLance(int linhafinal, int colunafinal, Tabuleiro tabuleiro, int cont){
 		if (tabuleiro.tabuleiro[linhafinal][colunafinal].estado == false){ //verifica se o destino final esta vazio
+			if((linha-linhafinal==1 || linha-linhafinal == -1) && cont>1){
+					return false;
+			}
 			if((linha-linhafinal)*(linha-linhafinal) == (coluna-colunafinal)*(coluna-colunafinal)){ //verifica se a posicao inicial e o destino estao na mesma diagonal
 				if ((linha-linhafinal) < 0){ //esta indo para frente
 					if (coluna-colunafinal < 0){ //esta indo para a direita
