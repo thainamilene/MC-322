@@ -85,26 +85,26 @@ class Main{
 			ifim--;
 
 			if (i==0){
-				if(tabuleiro.tabuleiro[iini][jini].cor == 'P'){
+				if(tabuleiro.tabuleiro[iini][jini].cor == 'P' || tabuleiro.tabuleiro[iini][jini].cor == 'Q'){
 					lance = 1;
 				} 
-				else if(tabuleiro.tabuleiro[iini][jini].cor == 'B'){
+				else if(tabuleiro.tabuleiro[iini][jini].cor == 'B' || tabuleiro.tabuleiro[iini][jini].cor == 'D'){
 					lance = 0;
 				}
 			}
-			else if((i!=0) && !(vfim.equals(cini)) &&( (tabuleiro.tabuleiro[iini][jini].cor=='P' && lance==0) || (tabuleiro.tabuleiro[iini][jini].cor == 'B' && lance == 1))){ //verifica se ainda e o lance da mesma peca da rodada anterior
-				if(tabuleiro.tabuleiro[iini][jini].cor == 'P'){
+			else if((i!=0) && !(vfim.equals(cini)) && (((tabuleiro.tabuleiro[iini][jini].cor=='P' || tabuleiro.tabuleiro[iini][jini].cor == 'Q') && lance==0) || ((tabuleiro.tabuleiro[iini][jini].cor == 'B' || tabuleiro.tabuleiro[iini][jini].cor == 'D') && lance == 1))){ //verifica se ainda e o lance da mesma peca da rodada anterior
+				if(tabuleiro.tabuleiro[iini][jini].cor == 'P' || tabuleiro.tabuleiro[iini][jini].cor == 'Q'){
 					lance = 1;
 					cont = 0;
 				} 
-				else if(tabuleiro.tabuleiro[iini][jini].cor == 'B'){
+				else if(tabuleiro.tabuleiro[iini][jini].cor == 'B' || tabuleiro.tabuleiro[iini][jini].cor == 'D'){
 					lance = 0;
 					cont = 0;
 				}
 			}
 			cont++;
 			boolean verificacao = false;
-			if ((lance == 0 && tabuleiro.tabuleiro[iini][jini].cor == 'B') || (lance == 1 && tabuleiro.tabuleiro[iini][jini].cor == 'P')){ //verifica se a jogada pertence ao lance certo
+			if ((lance == 0 && (tabuleiro.tabuleiro[iini][jini].cor == 'B' || tabuleiro.tabuleiro[iini][jini].cor == 'D')) || (lance == 1 && (tabuleiro.tabuleiro[iini][jini].cor == 'P' || tabuleiro.tabuleiro[iini][jini].cor == 'Q'))){ //verifica se a jogada pertence ao lance certo
 				if(tabuleiro.tabuleiro[iini][jini].estado == true && tabuleiro.tabuleiro[ifim][jfim].estado == false){ //verifica se a posicao final esta vazia e se a inicial nao esta
 					if (tabuleiro.tabuleiro[iini][jini].pNormal == true ){ //verifica se trata-se de uma peca normal
 						verificacao = tabuleiro.tabuleiro[iini][jini].saidaN.verificacaoLance(ifim,jfim,tabuleiro, cont);
@@ -118,7 +118,9 @@ class Main{
 				System.out.println("Jogada Inválida");
 				System.out.println(" ");
 			}
-			vfim=cfim;
+			else{
+				vfim=cfim;
+			}
 		}
 	}
 

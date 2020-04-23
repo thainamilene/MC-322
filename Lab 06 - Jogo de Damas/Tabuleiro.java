@@ -92,10 +92,16 @@ public class Tabuleiro{
 				}	
 			}
 		}
-		if((tabuleiro[linhafinal][colunafinal].linha==0 && tabuleiro[linhafinal][colunafinal].cor=='P') || (tabuleiro[linhafinal][colunafinal].linha==7 && tabuleiro[linhafinal][colunafinal].cor=='B')){ //transforma em Dama se puder
+		if((tabuleiro[linhafinal][colunafinal].linha == 0 && tabuleiro[linhafinal][colunafinal].cor =='P') || (tabuleiro[linhafinal][colunafinal].linha == 7 && tabuleiro[linhafinal][colunafinal].cor == 'B')){ //transforma em Dama se puder
 			tabuleiro[linhafinal][colunafinal].pNormal = false;
 			tabuleiro[linhafinal][colunafinal].pDama = true;
 			tabuleiro[linhafinal][colunafinal].saidaN = null;
+			if(tabuleiro[linhafinal][colunafinal].cor == 'P'){
+				tabuleiro[linhafinal][colunafinal].cor = 'Q';
+			}
+			else{
+				tabuleiro[linhafinal][colunafinal].cor = 'D';
+			}
 			if(tabuleiro[linhafinal][colunafinal].saidaD == null){
 				tabuleiro[linhafinal][colunafinal].saidaD = new Dama(tabuleiro[linhafinal][colunafinal].cor, tabuleiro[linhafinal][colunafinal].estado, tabuleiro[linhafinal][colunafinal].linha, tabuleiro[linhafinal][colunafinal].coluna, tabuleiro[linhafinal][colunafinal].pNormal, tabuleiro[linhafinal][colunafinal].pDama);
 			}

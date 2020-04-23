@@ -23,24 +23,24 @@ public class Pecanormal extends Pecagenerica{
 				}
 				if ((linha-linhafinal) < 0){ //esta indo para frente
 					if (coluna-colunafinal < 0){ //esta indo para a direita
-						if((tabuleiro.tabuleiro[linha+1][coluna+1].estado == true && tabuleiro.tabuleiro[linha+1][coluna+1].cor == tabuleiro.tabuleiro[linha][coluna].cor) || (tabuleiro.tabuleiro[linha+2][coluna+2].estado == true)){
+						if((tabuleiro.tabuleiro[linha+1][coluna+1].estado == true) && ((tabuleiro.tabuleiro[linha+1][coluna+1].cor == tabuleiro.tabuleiro[linha][coluna].cor) || (tabuleiro.tabuleiro[linha][coluna].cor == 'B' && tabuleiro.tabuleiro[linha+1][coluna+1].cor == 'D') || (tabuleiro.tabuleiro[linha][coluna].cor == 'P' && tabuleiro.tabuleiro[linha+1][coluna+1].cor == 'Q') || (tabuleiro.tabuleiro[linha+2][coluna+2].estado == true))){
 							return false;
 						} 
 					}
 					else{ //esta indo para a esquerda
-						if((tabuleiro.tabuleiro[linha+1][coluna-1].estado == true && tabuleiro.tabuleiro[linha+1][coluna-1].cor == tabuleiro.tabuleiro[linha][coluna].cor) || (tabuleiro.tabuleiro[linha+2][coluna-2].estado == true )){
+						if((tabuleiro.tabuleiro[linha+1][coluna-1].estado == true) && ((tabuleiro.tabuleiro[linha+1][coluna-1].cor == tabuleiro.tabuleiro[linha][coluna].cor) || (tabuleiro.tabuleiro[linha][coluna].cor == 'B' && tabuleiro.tabuleiro[linha+1][coluna-1].cor == 'D') || (tabuleiro.tabuleiro[linha][coluna].cor == 'P' && tabuleiro.tabuleiro[linha+1][coluna-1].cor == 'Q') || (tabuleiro.tabuleiro[linha+2][coluna-2].estado == true ))){
 							return false;
 						} 
 					} 
 				}
 				else{ // esta indo para tras
 					if (coluna-colunafinal < 0){ //esta indo para a direita
-						if((tabuleiro.tabuleiro[linha-1][coluna+1].estado == true && tabuleiro.tabuleiro[linha-1][coluna+1].cor == tabuleiro.tabuleiro[linha][coluna].cor) || (tabuleiro.tabuleiro[linha-2][coluna+2].estado == true)){
+						if((tabuleiro.tabuleiro[linha-1][coluna+1].estado == true) && ((tabuleiro.tabuleiro[linha-1][coluna+1].cor == tabuleiro.tabuleiro[linha][coluna].cor) || (tabuleiro.tabuleiro[linha][coluna].cor == 'B' && tabuleiro.tabuleiro[linha-1][coluna+1].cor == 'D') || (tabuleiro.tabuleiro[linha][coluna].cor == 'P' && tabuleiro.tabuleiro[linha-1][coluna+1].cor == 'Q') || (tabuleiro.tabuleiro[linha-2][coluna+2].estado == true))){
 							return false;
 						}
 					} 
 					else{ //esta indo para a esquerda
-						if((tabuleiro.tabuleiro[linha-1][coluna-1].estado == true && tabuleiro.tabuleiro[linha-1][coluna-1].cor == tabuleiro.tabuleiro[linha][coluna].cor) || (tabuleiro.tabuleiro[linha-2][coluna-2].estado == true)){
+						if((tabuleiro.tabuleiro[linha-1][coluna-1].estado == true) && ((tabuleiro.tabuleiro[linha-1][coluna-1].cor == tabuleiro.tabuleiro[linha][coluna].cor) || (tabuleiro.tabuleiro[linha][coluna].cor == 'B' && tabuleiro.tabuleiro[linha-1][coluna-1].cor == 'D') || (tabuleiro.tabuleiro[linha][coluna].cor == 'P' && tabuleiro.tabuleiro[linha-1][coluna-1].cor == 'Q') || (tabuleiro.tabuleiro[linha-2][coluna-2].estado == true))){
 							return false;
 						} 
 					}
