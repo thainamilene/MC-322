@@ -1,5 +1,4 @@
 public class Tower extends Pieces{ 
-    char type;
     
     public Tower (char color, boolean state, int line, int column, char type){
         super(color, state, line, column, type);
@@ -8,7 +7,7 @@ public class Tower extends Pieces{
         if (line!=fline && column!=fcolumn){
             return false;
         }
-        if (chess.board[fline][fcolumn].state ==true && chess.board[fline][fcolumn].color == color){//verifica se o destino nao ha uma peca da mesma cor
+        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color){//verifica se o destino nao ha uma peca da mesma cor
             return false;
         }
         if (line == fline){//andando na mesma linha
@@ -32,14 +31,14 @@ public class Tower extends Pieces{
         }
         else if(column == fcolumn){//andando na vertical
             if (line-fline<0){//indo para frente
-                for (int i = 0; i < fline-line; i++) {
+                for (int i = 0; i < fline-line-1; i++) {
                     if(chess.board[line][i].state){
                         return false;
                     }
                 }
             }
             else if(fline-line<0){//indo para tras
-                for (int i = 0; i < line-fline; i++) {
+                for (int i = 0; i < line-fline-1; i++) {
                     if(chess.board[line][i].state){
                         return false;
                     }

@@ -1,11 +1,11 @@
-public class Pieces{
+public class Pieces {
 	char color;
 	boolean state;
 	int line;
 	int column;
 	char type;
 
-	Pieces(char color, boolean state, int line, int column, char type){
+	Pieces(char color, boolean state, int line, int column, char type) {
 		this.color = color;
 		this.state = state;
 		this.line = line;
@@ -20,7 +20,7 @@ public class Pieces{
 		state = false;
 		type = '-';
 	}
-	boolean checkMoviment(){
+	boolean checkMoviment(int fline, int fcolumn, Chessboard chess) {
 		return true;
 	}
 }

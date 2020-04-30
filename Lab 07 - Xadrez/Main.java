@@ -1,3 +1,4 @@
+//Thaina Milene de Oliveira - ra244570
 class Main{
     static void createPieces(Chessboard chess){
         chess.board[0][0] = new Tower('B', true, 0, 0, 't');
