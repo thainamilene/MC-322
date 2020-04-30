@@ -8,10 +8,10 @@ public class Chessboard{
 			}			
 		}
 	}
-    void Moviment(){
+    void moviment(){
 
     }
-    
+
     void printOut(){
 		for(int i=8; i>0; i--){
 				System.out.print (i); 				

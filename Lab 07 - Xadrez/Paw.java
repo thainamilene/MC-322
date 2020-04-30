@@ -8,7 +8,9 @@ public class Paw extends Pieces{
         if ((color == 'P' && fline-line>=1 )|| (color == 'B' && line-fline>=1) || fline == line){ //verifica se esta andando para sua respectiva frente
             return false;
         }
-        
+        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color) { //verifica se no destino ha peca da mesma cor
+            return false;
+        }
         if (column == fcolumn && ((line-fline)*(line-fline) == 1)){ //caso ande apenas uma casa
             if (chess.board[fline][fcolumn].state == true){ // quando ha uma peca em sua frente
                 return false;
@@ -20,7 +22,8 @@ public class Paw extends Pieces{
              }
         }
         else if ((column == fcolumn && (line - fline)*(line - fline) == 4)) {//caso ande duas casas para frente
-            if(line == 7 || line == 0){
+            if((line == 6 && color == 'P')|| (line == 1 && color =='B') && chess.board[fline][fcolumn].state==false ){//verifica se e o primeiro movimento e se o destino esta vazio
+                chess.moviment();
                 return true;
             }
             else{
@@ -31,7 +34,7 @@ public class Paw extends Pieces{
             return false;
         }
 
-        chess.Moviment();
+        chess.moviment();
         return true;
     }
 }
