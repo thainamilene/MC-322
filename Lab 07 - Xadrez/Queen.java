@@ -100,8 +100,8 @@ public class Queen extends Pieces{
         else{
            return false;
         }
-        
-        chess.moviment();
+
+        chess.moviment(line, column, fline, fcolumn, type);
         return true;
     }
 }

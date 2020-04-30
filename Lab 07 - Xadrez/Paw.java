@@ -23,7 +23,7 @@ public class Paw extends Pieces {
         }
         else if ((column == fcolumn && (line - fline)*(line - fline) == 4)) {//caso ande duas casas para frente
             if((line == 6 && color == 'P')|| (line == 1 && color =='B') && chess.board[fline][fcolumn].state==false) {//verifica se e o primeiro movimento e se o destino esta vazio
-                chess.moviment();
+                chess.moviment(line, column, fline, fcolumn, type);
                 return true;
             }
             else{
@@ -34,7 +34,7 @@ public class Paw extends Pieces {
             return false;
         }
 
-        chess.moviment();
+        chess.moviment(line, column, fline, fcolumn, type);
         return true;
     }
 }

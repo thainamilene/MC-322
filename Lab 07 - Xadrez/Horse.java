@@ -8,7 +8,7 @@ public class Horse extends Pieces{
             return false;
         }
         if (((line-fline)*(line-fline) == 4 && (column-fcolumn)*(column-fcolumn) == 1) || ((line-fline)*(line-fline) == 1 && (column-fcolumn)*(column-fcolumn) == 4)){ //verifica se o cavalo anda em L
-            chess.moviment();
+            chess.moviment(line, column, fline, fcolumn, type);
             return true;
         }
         return false;

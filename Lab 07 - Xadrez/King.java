@@ -10,7 +10,7 @@ public class King extends Pieces{
         if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color) {//verifica se o destino ha uma peca da mesma cor
             return false;
         }
-        chess.moviment();
+        chess.moviment(line, column, fline, fcolumn, type);
         return true;
     }       
 }

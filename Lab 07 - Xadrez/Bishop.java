@@ -64,7 +64,7 @@ public class Bishop extends Pieces{
            return false;
         }
         
-	chess.moviment();
+	chess.moviment(line, column, fline, fcolumn, type);
 	return true;
 	}	
 }

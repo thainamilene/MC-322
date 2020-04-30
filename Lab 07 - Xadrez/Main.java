@@ -38,10 +38,17 @@ class Main{
         System.out.println("Tabuleiro inicial:");
         chess.printOut();
     }
+    static void rounds(Commands[] commands, Chessboard chess){
+
+    }
     
     public static void main(String[] args){
         Chessboard chess = new Chessboard();
         createPieces(chess);
+        Commands csv = new Commands();
+		csv.setDataSource("./arq001.csv");
+        Commands commands[] = csv.requestCommands(0);
+        rounds(commands, chess);
     }
     
 }

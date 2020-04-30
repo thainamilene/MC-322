@@ -15,7 +15,6 @@ public class Chessboard{
         else if (type == 'b' || type == 'B'){
             board[fline][fcolumn] = new Bishop(board[line][column].color, board[line][column].state, fline, fcolumn, board[line][column].type);
         }
-
         else if (type == 't' || type == 'T'){
             board[fline][fcolumn] = new Tower(board[line][column].color, board[line][column].state, fline, fcolumn, board[line][column].type);
         }
