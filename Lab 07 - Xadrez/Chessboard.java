@@ -1,13 +1,16 @@
 public class Chessboard{
     Pieces[][] board = new Pieces[8][8];
+    int[] KingBranco = {0,4}; //guarda a posicao do rei no tabuleiro
+    int[] KingPreto = {7,3};
     
     Chessboard(){
 		for (int i=0; i<8; i++) {
 			for (int j=0; j<8; j++) {
 				board[i][j] = new Pieces(i,j);							
 			}			
-		}
-	}
+        }
+    }
+    
     void moviment(int line, int column, int fline, int fcolumn, char type){
         if (type == 'p' || type == 'P'){
             board[fline][fcolumn] = new Paw(board[line][column].color, board[line][column].state, fline, fcolumn, board[line][column].type);
@@ -26,11 +29,19 @@ public class Chessboard{
         }
         else if (type == 'k' || type == 'K'){
             board[fline][fcolumn] = new King(board[line][column].color, board[line][column].state, fline, fcolumn, board[line][column].type);
+            if(board[line][column].color == 'B') {
+                KingBranco[0]=fline;
+                KingBranco[1]=fcolumn;
+            }
+            else{
+                KingPreto[0]=fline;
+                KingPreto[1]=fcolumn;
+            }
         }
         board[line][column].color = '-';
         board[line][column].state = false;
         board[line][column].type = '-';
-
+        printOut();
     }
 
     void printOut(){

@@ -20,7 +20,7 @@ public class Pieces {
 		state = false;
 		type = '-';
 	}
-	boolean checkMoviment(int fline, int fcolumn, Chessboard chess) {
-		return true;
+	boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype) {
+		return false;
 	}
 }

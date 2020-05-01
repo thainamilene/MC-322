@@ -4,7 +4,7 @@ public class Paw extends Pieces {
         super(color, state, line, column, type);
     }
 
-    boolean checkMoviment(int fline, int fcolumn, Chessboard chess){
+    boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype){
         if ((color == 'P' && fline-line>=1 )|| (color == 'B' && line-fline>=1) || fline == line) { //verifica se esta andando para sua respectiva frente
             return false;
         }
@@ -17,13 +17,18 @@ public class Paw extends Pieces {
             }
         }
         else if ((column - fcolumn)*(column - fcolumn) == (line - fline)*(line - fline) && (line - fline)*(line - fline) == 1) { //caso ande uma casa na diagonal
-             if (chess.board[fline][fcolumn].color == color || chess.board[fline][fcolumn].state == false) { //caso nao haja peca ou a as pecas sejam da mesma cor
-                 return false;
+            if (chess.board[fline][fcolumn].color == color || chess.board[fline][fcolumn].state == false) { //caso nao haja peca ou a as pecas sejam da mesma cor
+                return false;
              }
-        }
+            }
         else if ((column == fcolumn && (line - fline)*(line - fline) == 4)) {//caso ande duas casas para frente
             if((line == 6 && color == 'P')|| (line == 1 && color =='B') && chess.board[fline][fcolumn].state==false) {//verifica se e o primeiro movimento e se o destino esta vazio
-                chess.moviment(line, column, fline, fcolumn, type);
+                if (transforms) {
+                    chess.moviment(line, column, fline, fcolumn, newtype);
+                } 
+                else{
+                    chess.moviment(line, column, fline, fcolumn, type);
+                }
                 return true;
             }
             else{
@@ -33,8 +38,13 @@ public class Paw extends Pieces {
         else{
             return false;
         }
-
-        chess.moviment(line, column, fline, fcolumn, type);
+        
+        if (transforms) {
+            chess.moviment(line, column, fline, fcolumn, newtype);
+        } 
+        else{
+            chess.moviment(line, column, fline, fcolumn, type);
+        }
         return true;
     }
 }

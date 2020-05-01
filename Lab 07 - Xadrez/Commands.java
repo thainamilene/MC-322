@@ -15,13 +15,14 @@ public class Commands extends CSVReader{
         return array;
     }
 
-    void createArray(String[] commands){
+    void createArray(String[] commands) {
+        array = new Commands[commands.length];
         for (int i = 0; i < commands.length; i++) {
-            if(commands[i].length()>1){
-                array[i] = new Moviment(commands[i]);
+            if(i<commands.length && commands[i].length()>1 && commands[i].length()==1){
+                array[i] = new Transforms(commands[i], commands[i+1]);
             }
-            else{
-                array[i] = new Transforms(commands[i]);
+            else if(commands[i].length()>1){
+                array[i] = new Moviment(commands[i]);
             }
         }
         return;

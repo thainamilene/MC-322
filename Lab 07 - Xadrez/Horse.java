@@ -3,7 +3,7 @@ public class Horse extends Pieces{
     public Horse (char color, boolean state, int line, int column, char type){
         super(color, state, line, column, type);
     }
-    boolean checkMoviment(int fline, int fcolumn, Chessboard chess){
+    boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype){
         if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color){//verifica se o destino ha uma peca da mesma cor
             return false;
         }
