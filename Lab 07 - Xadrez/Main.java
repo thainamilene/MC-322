@@ -38,7 +38,7 @@ class Main{
         System.out.println("Tabuleiro inicial:");
         chess.printOut();
     }
-    static void rounds(Commands[] commands, Chessboard chess){
+    static void moves(Commands[] commands, Chessboard chess){
         boolean v = false;
         for (int i = 0; i < commands.length; i++) {
             System.out.println("Source: " + commands[i].source2);
@@ -61,7 +61,7 @@ class Main{
         Commands csv = new Commands();
 		csv.setDataSource("./arq001.csv");
         Commands commands[] = csv.requestCommands(0);
-        rounds(commands, chess);
+        moves(commands, chess);
     }
     
 }
