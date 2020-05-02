@@ -1,6 +1,7 @@
 //Thaina Milene de Oliveira - ra244570
 class Main{
-    static void createPieces(Chessboard chess){
+
+    static void createPieces(Chessboard chess) { //cria as pecas e as aloca no tabuleiro
         chess.board[0][0] = new Tower('B', true, 0, 0, 't');
         chess.board[0][1] = new Horse('B', true, 0, 1, 'h');
         chess.board[0][2] = new Bishop('B', true, 0, 2, 'b');
@@ -38,24 +39,40 @@ class Main{
         System.out.println("Tabuleiro inicial:");
         chess.printOut();
     }
-    static void moves(Commands[] commands, Chessboard chess){
-        boolean v = false;
+
+    static void moves(Commands[] commands, Chessboard chess) {
+        boolean v; //verificacao se o lance e valido
+        int round = 0; //controle de lance - 1 se e vez do preto e 0 do branco;
         for (int i = 0; i < commands.length; i++) {
+            v = false;
+            if(commands[i] == null) {
+                break;
+            }
             System.out.println("Source: " + commands[i].source2);
             System.out.println("Target: " + commands[i].target2);
-            if(commands[i] instanceof Moviment){
-                v = chess.board[commands[i].source[0]][commands[i].source[1]].checkMoviment(commands[i].target[0], commands[i].target[1], chess, false, chess.board[commands[i].source[0]][commands[i].source[1]].type);
+            if (chess.board[commands[i].source[0]][commands[i].source[1]].state && (round == 0 && chess.board[commands[i].source[0]][commands[i].source[1]].color == 'B') || (round == 1 && chess.board[commands[i].source[0]][commands[i].source[1]].color == 'P')) { //verifica se a potencial peca a ser movida faz parte do lance certo
+                if(commands[i] instanceof Moviment) {
+                    v = chess.board[commands[i].source[0]][commands[i].source[1]].checkMoviment(commands[i].target[0], commands[i].target[1], chess, false, chess.board[commands[i].source[0]][commands[i].source[1]].type);
+                }
+                else if (commands[i] instanceof Transforms) {
+                    v = chess.board[commands[i].source[0]][commands[i].source[1]].checkMoviment(commands[i].target[0], commands[i].target[1], chess, true, commands[i].newtype);
+                }
             }
-            else if (commands[i] instanceof Transforms) {
-                v = chess.board[commands[i].source[0]][commands[i].source[1]].checkMoviment(commands[i].target[0], commands[i].target[1], chess, false, commands[i].newtype);
+            if (v == false) {
+                System.out.println("Jogada Inválida\n");
             }
-            if (v==false){
-                System.out.println("Jogada Inválida");
+            else { //muda o lance
+                if (round == 0) {
+                    round = 1;
+                }
+                else{
+                    round = 0;
+                }
             }
         }
     }
     
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Chessboard chess = new Chessboard();
         createPieces(chess);
         Commands csv = new Commands();
@@ -63,5 +80,4 @@ class Main{
         Commands commands[] = csv.requestCommands(0);
         moves(commands, chess);
     }
-    
 }

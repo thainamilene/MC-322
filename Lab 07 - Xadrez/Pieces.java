@@ -13,7 +13,7 @@ public class Pieces {
 		this.type = type;
 	}
 
-	Pieces(int line, int column){
+	Pieces(int line, int column) {
 		this.line = line;
 		this.column = column;
 		color = '-';
@@ -22,5 +22,8 @@ public class Pieces {
 	}
 	boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype) {
 		return false;
+	}
+	boolean checkCheck(int lline, int ccolumn, Chessboard chess, char ccolor) {
+		return true;
 	}
 }

@@ -1,26 +1,29 @@
 public class Tower extends Pieces{ 
     
-    public Tower (char color, boolean state, int line, int column, char type){
+    public Tower (char color, boolean state, int line, int column, char type) {
         super(color, state, line, column, type);
     }
-    boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype){
-        if (line!=fline && column!=fcolumn){
+    boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype) {
+        if (transforms) {
             return false;
         }
-        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color){//verifica se o destino nao ha uma peca da mesma cor
+        if (line!=fline && column!=fcolumn) {
             return false;
         }
-        if (line == fline){//andando na mesma linha
-            if(column-fcolumn<0){//esta indo para a direita
+        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color) {//verifica se o destino nao ha uma peca da mesma cor
+            return false;
+        }
+        if (line == fline) {//andando na mesma linha
+            if(column-fcolumn<0) {//esta indo para a direita
                 for (int i = 1; i < fcolumn-column; i++) {
-                    if(chess.board[line][column+i].state){
+                    if(chess.board[line][column+i].state) {
                         return false;
                     }
                 }
             }
-            else if(fcolumn-column<0){//esta indo para a esquerda
+            else if(fcolumn-column<0) {//esta indo para a esquerda
                 for (int i = 1; i < column-fcolumn; i++) {
-                    if(chess.board[line][column-i].state){
+                    if(chess.board[line][column-i].state) {
                         return false;
                     }
                 }
@@ -29,17 +32,18 @@ public class Tower extends Pieces{
                 return false;
             }
         }
-        else if(column == fcolumn){//andando na vertical
-            if (line-fline<0){//indo para frente
+        else if(column == fcolumn) {//andando na vertical
+            if (line-fline<0) {//indo para frente
                 for (int i = 1; i < fline-line; i++) {
-                    if(chess.board[line+i][column].state == true){
+                    if(chess.board[line+i][column].state == true) {
                         return false;
                     }
                 }
             }
-            else if(fline-line<0){//indo para tras
-                for (int i = 0; i < line-fline; i++) {
-                    if(chess.board[line-i][column].state){
+            else if(fline-line<0) {//indo para tras
+                for (int i = 1; i < line-fline; i++) {
+                    if(chess.board[line-i][column].state) {
+                        System.out.println(i);
                         return false;
                     }
                 }
@@ -51,7 +55,19 @@ public class Tower extends Pieces{
         else{
             return false;
         }
-        chess.moviment(line, column, fline, fcolumn, type);
-        return true;
+        boolean v = true;
+        if(color == 'B') {
+            v = chess.board[chess.KingBranco[0]][chess.KingBranco[1]].checkCheck(chess.KingBranco[0], chess.KingBranco[1], chess, chess.board[chess.KingBranco[0]][chess.KingBranco[1]].color);
+        }
+        else if (color == 'P') {
+            v =  chess.board[chess.KingPreto[0]][chess.KingPreto[1]].checkCheck(chess.KingPreto[0], chess.KingPreto[1], chess, chess.board[chess.KingPreto[0]][chess.KingPreto[1]].color);
+        }
+        if (!v) {
+            chess.moviment(line, column, fline, fcolumn, type);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

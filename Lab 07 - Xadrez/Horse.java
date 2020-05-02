@@ -1,15 +1,30 @@
 public class Horse extends Pieces{ 
     
-    public Horse (char color, boolean state, int line, int column, char type){
+    public Horse (char color, boolean state, int line, int column, char type) {
         super(color, state, line, column, type);
     }
-    boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype){
-        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color){//verifica se o destino ha uma peca da mesma cor
+    boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype) {
+        if (transforms) {
             return false;
         }
-        if (((line-fline)*(line-fline) == 4 && (column-fcolumn)*(column-fcolumn) == 1) || ((line-fline)*(line-fline) == 1 && (column-fcolumn)*(column-fcolumn) == 4)){ //verifica se o cavalo anda em L
-            chess.moviment(line, column, fline, fcolumn, type);
-            return true;
+        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color) {//verifica se o destino ha uma peca da mesma cor
+            return false;
+        }
+        if (((line-fline)*(line-fline) == 4 && (column-fcolumn)*(column-fcolumn) == 1) || ((line-fline)*(line-fline) == 1 && (column-fcolumn)*(column-fcolumn) == 4)) { //verifica se o cavalo anda em L
+            boolean v = true;
+            if(color == 'B') {
+                v = chess.board[chess.KingBranco[0]][chess.KingBranco[1]].checkCheck(chess.KingBranco[0], chess.KingBranco[1], chess, chess.board[chess.KingBranco[0]][chess.KingBranco[1]].color);
+            }
+            else if (color == 'P') {
+                v =  chess.board[chess.KingPreto[0]][chess.KingPreto[1]].checkCheck(chess.KingPreto[0], chess.KingPreto[1], chess, chess.board[chess.KingPreto[0]][chess.KingPreto[1]].color);
+            }
+            if (!v) {
+                chess.moviment(line, column, fline, fcolumn, type);
+                return true;
+            }
+            else {
+                return false;
+            }
         }
         return false;
     }

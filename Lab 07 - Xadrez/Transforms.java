@@ -1,12 +1,13 @@
-public class Transforms extends Commands{
-    Transforms (String move, String newtype){
+public class Transforms extends Commands {
+
+    Transforms (String move, String newtype) {
         super();
         this.newtype = newtype.charAt(0);
         source2 = move.substring(0,2);
 		target2 = move.substring(3,5);
         String ini = move.substring(0,1);
         String fim = move.substring(3,4);
-        if (ini.equals("a")){
+        if (ini.equals("a")) {
             source[1] = 0;
         } else if (ini.equals("b")) {
             source[1] = 1;
@@ -20,11 +21,11 @@ public class Transforms extends Commands{
             source[1] = 5;
         } else if (ini.equals("g")) {
             source[1] = 6;
-        } else if (ini.equals("h")){
+        } else if (ini.equals("h")) {
             source[1] = 7;
         }
 
-        if (fim.equals("a")){
+        if (fim.equals("a")) {
             target[1] = 0;
         } else if (fim.equals("b")) {
             target[1] = 1;
@@ -38,7 +39,7 @@ public class Transforms extends Commands{
             target[1] = 5;
         } else if (fim.equals("g")) {
             target[1] = 6;
-        } else if (fim.equals("h")){
+        } else if (fim.equals("h")) {
             target[1] = 7;
         }
         
