@@ -4,17 +4,17 @@ public class King extends Pieces{
         super(color, state, line, column, type);
     }
     boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype) {
-        if (transforms) {
+        if (transforms) { //verifica se o movimento nao e do tipo transforms
             return false;
         }
         boolean v = true;
-        if((line-fline)*(line-fline)>1 || (column-fcolumn)*(column-fcolumn)>1) {//verifica se o rei anda uma casa
+        if((line-fline)*(line-fline)>1 || (column-fcolumn)*(column-fcolumn)>1) { //verifica se o rei anda uma casa
             return false;
         } 
-        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color) {//verifica se o destino ha uma peca da mesma cor
+        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color) { //verifica se o destino ha uma peca da mesma cor
             return false;
         }
-        v = checkCheck(fline, fcolumn, chess, color);
+        v = checkCheck(fline, fcolumn, chess, color); //checa se o movimento nao colocara o rei em xeque
         if (!v) {
             chess.moviment(line, column, fline, fcolumn, type);
             return true;
@@ -25,7 +25,7 @@ public class King extends Pieces{
         int i = 1;
         int v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0, v7 = 0, v8 = 0;
         while(i<8) {
-            if (lline+i<8) {//mesma coluna indo para frente
+            if (lline+i<8) { // verifica na mesma coluna indo para frente
                 if(chess.board[lline+i][ccolumn].state && v1 == 0) {
                     if (i==1 && (chess.board[lline+i][ccolumn].color!=ccolor && (chess.board[lline+i][ccolumn].type == 'k' || chess.board[lline+i][ccolumn].type == 'K' ))) {
                         return true;
@@ -38,7 +38,7 @@ public class King extends Pieces{
                     }
                 }
             }
-            if (lline-i>=0) {//mesma coluna indo para tras
+            if (lline-i>=0) { //verifica na mesma coluna indo para tras
                 if(chess.board[lline-i][ccolumn].state && v2 == 0)  {
                     if (i==1 && chess.board[lline-i][ccolumn].color!=ccolor && (chess.board[lline-i][ccolumn].type == 'k' || chess.board[lline-i][ccolumn].type == 'K')) {
                         return true;    
@@ -51,7 +51,7 @@ public class King extends Pieces{
                     }
                 }
             }
-            if (ccolumn+i<8) {//mesma linha indo para direita
+            if (ccolumn+i<8) { //verifica na mesma linha indo para direita
                 if(chess.board[lline][ccolumn+i].state && v3 == 0) {
                     if (i==0 && chess.board[lline][ccolumn+i].color!=ccolor && (chess.board[lline][ccolumn+i].type == 'k' || chess.board[lline][ccolumn+i].type == 'K')) {
                         return true;
@@ -64,7 +64,7 @@ public class King extends Pieces{
                     }
                 }
             }
-            if (ccolumn-i>=0) {//mesma linha indo para esquerda
+            if (ccolumn-i>=0) { //verifica na mesma linha indo para esquerda
                 if(chess.board[lline][ccolumn-i].state && v4 == 0) {
                     if (i==0 && chess.board[lline][ccolumn-i].color!=ccolor && (chess.board[lline][ccolumn-i].type == 'k' || chess.board[lline][ccolumn-i].type == 'K')) {
                         return true;   
@@ -77,7 +77,7 @@ public class King extends Pieces{
                     }
                 }
             }
-            if (lline+i<8 && ccolumn+i<8) {//diagonal direita para frente
+            if (lline+i<8 && ccolumn+i<8) { //verifica na diagonal direita para frente
                 if(i==1 && chess.board[lline+i][ccolumn+i].state && chess.board[lline+i][ccolumn+i].color!=ccolor && (chess.board[lline+i][ccolumn+i].type == 'p' || chess.board[lline+i][ccolumn+i].type == 'P' || chess.board[lline+i][ccolumn+i].type == 'k' || chess.board[lline+i][ccolumn+i].type == 'K')) {
                     return true;
                 }
@@ -90,7 +90,7 @@ public class King extends Pieces{
                     }
                 }
             }
-            if (lline+i<8 && ccolumn-i>=0) {//diagonal esquerda para frente
+            if (lline+i<8 && ccolumn-i>=0) { // verifica na diagonal esquerda para frente
                 if(i==1 && chess.board[lline+i][ccolumn-i].state && chess.board[lline+i][ccolumn-i].color!=ccolor && (chess.board[lline+i][ccolumn-i].type == 'p' || chess.board[lline+i][ccolumn-i].type == 'P' || chess.board[lline+i][ccolumn-i].type == 'k' || chess.board[lline+i][ccolumn-i].type == 'K')) {
                     return true;
                 }
@@ -103,7 +103,7 @@ public class King extends Pieces{
                     }
                 }
             }
-            if (lline-i>=0 && ccolumn+i<8) {//diagonal direita para tras
+            if (lline-i>=0 && ccolumn+i<8) { //verifica na diagonal direita para tras
                 if(i==1 && chess.board[lline-i][ccolumn+i].state && chess.board[lline-i][ccolumn+i].color!=ccolor && (chess.board[lline-i][ccolumn+i].type == 'p' || chess.board[lline-i][ccolumn+i].type == 'P' || chess.board[lline+i][ccolumn-i].type == 'k' || chess.board[lline+i][ccolumn-i].type == 'K')) {
                     return true;
                 }
@@ -116,7 +116,7 @@ public class King extends Pieces{
                     }
                 }
             }
-            if (lline-i>=0 && ccolumn-i>=0) {//diagonal esquerda para tras
+            if (lline-i>=0 && ccolumn-i>=0) { // verifica na diagonal esquerda para tras
                 if(i==1 && chess.board[lline-i][ccolumn-i].state && chess.board[lline-i][ccolumn-i].color!=ccolor && (chess.board[lline-i][ccolumn-i].type == 'p' || chess.board[lline-i][ccolumn-i].type == 'P' || chess.board[lline-i][ccolumn-i].type == 'k' || chess.board[lline-i][ccolumn-i].type == 'K')) {
                     return true;
                 }

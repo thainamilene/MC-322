@@ -4,24 +4,24 @@ public class Tower extends Pieces{
         super(color, state, line, column, type);
     }
     boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype) {
-        if (transforms) {
+        if (transforms) { //verifiva se o movimento e do tipo transforma
             return false;
         }
-        if (line!=fline && column!=fcolumn) {
+        if (line!=fline && column!=fcolumn) { //verifica se a torre anda em linha reta
             return false;
         }
-        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color) {//verifica se o destino nao ha uma peca da mesma cor
+        if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color) { //verifica se o destino nao ha uma peca da mesma cor
             return false;
         }
-        if (line == fline) {//andando na mesma linha
-            if(column-fcolumn<0) {//esta indo para a direita
+        if (line == fline) { //verifica se esta andando na mesma linha
+            if(column-fcolumn<0) { //verifica se esta indo para a direita
                 for (int i = 1; i < fcolumn-column; i++) {
                     if(chess.board[line][column+i].state) {
                         return false;
                     }
                 }
             }
-            else if(fcolumn-column<0) {//esta indo para a esquerda
+            else if(fcolumn-column<0) { //verifica se esta indo para a esquerda
                 for (int i = 1; i < column-fcolumn; i++) {
                     if(chess.board[line][column-i].state) {
                         return false;
@@ -32,15 +32,15 @@ public class Tower extends Pieces{
                 return false;
             }
         }
-        else if(column == fcolumn) {//andando na vertical
-            if (line-fline<0) {//indo para frente
+        else if(column == fcolumn) { //verifica se esta andando na vertical
+            if (line-fline<0) { //verifica se esta indo para frente
                 for (int i = 1; i < fline-line; i++) {
                     if(chess.board[line+i][column].state == true) {
                         return false;
                     }
                 }
             }
-            else if(fline-line<0) {//indo para tras
+            else if(fline-line<0) { //verifica se esta indo para tras
                 for (int i = 1; i < line-fline; i++) {
                     if(chess.board[line-i][column].state) {
                         System.out.println(i);
@@ -56,10 +56,10 @@ public class Tower extends Pieces{
             return false;
         }
         boolean v = true;
-        if(color == 'B') {
+        if(color == 'B') { //checa se o movimento nao colocara o rei em xeque
             v = chess.board[chess.KingBranco[0]][chess.KingBranco[1]].checkCheck(chess.KingBranco[0], chess.KingBranco[1], chess, chess.board[chess.KingBranco[0]][chess.KingBranco[1]].color);
         }
-        else if (color == 'P') {
+        else if (color == 'P') { //checa se o movimento nao coverifica selocara o rei em xeque
             v =  chess.board[chess.KingPreto[0]][chess.KingPreto[1]].checkCheck(chess.KingPreto[0], chess.KingPreto[1], chess, chess.board[chess.KingPreto[0]][chess.KingPreto[1]].color);
         }
         if (!v) {

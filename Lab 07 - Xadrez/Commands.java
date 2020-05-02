@@ -1,9 +1,9 @@
 public class Commands extends CSVReader {
     Commands[] array;
-    int[] source = new int [2];
-    int[] target = new int [2];
-    String source2, target2;
-    char newtype;
+    int[] source = new int [2]; //guarda a linha e coluna do source
+    int[] target = new int [2]; //guarda a linha e coluna do target
+    String source2, target2; //guarda as strings com o source e target
+    char newtype; //guarda o novo tipo se o movimento for do tipo transforma
 
     Commands() {
         super();
@@ -15,7 +15,7 @@ public class Commands extends CSVReader {
         return array;
     }
 
-    void createArray(String[] commands) {
+    void createArray(String[] commands) { //transforma o vetor de strings gerado por CSVReader em um vetor com os comandos
         array = new Commands[commands.length];
         int j = 0;
         for (int i = 0; i < commands.length; i++) {
