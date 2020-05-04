@@ -13,22 +13,22 @@ public class Chessboard{
     
     void moviment(int line, int column, int fline, int fcolumn, char type) {
         if (type == 'p' || type == 'P') {
-            board[fline][fcolumn] = new Paw(board[line][column].color, board[line][column].state, fline, fcolumn, type);
+            board[fline][fcolumn] = new Paw(board[line][column].color, board[line][column].state, fline, fcolumn, type, board[line][column].count);
         }
         else if (type == 'b' || type == 'B') {
-            board[fline][fcolumn] = new Bishop(board[line][column].color, board[line][column].state, fline, fcolumn, type);
+            board[fline][fcolumn] = new Bishop(board[line][column].color, board[line][column].state, fline, fcolumn, type, board[line][column].count);
         }
         else if (type == 't' || type == 'T') {
-            board[fline][fcolumn] = new Tower(board[line][column].color, board[line][column].state, fline, fcolumn, type);
+            board[fline][fcolumn] = new Tower(board[line][column].color, board[line][column].state, fline, fcolumn, type, board[line][column].count);
         }
         else if (type == 'h' || type == 'H') {
-            board[fline][fcolumn] = new Horse(board[line][column].color, board[line][column].state, fline, fcolumn, type);
+            board[fline][fcolumn] = new Horse(board[line][column].color, board[line][column].state, fline, fcolumn, type, board[line][column].count);
         }
         else if (type == 'q' || type == 'Q') {
-            board[fline][fcolumn] = new Queen(board[line][column].color, board[line][column].state, fline, fcolumn, type);
+            board[fline][fcolumn] = new Queen(board[line][column].color, board[line][column].state, fline, fcolumn, type, board[line][column].count);
         }
         else if (type == 'k' || type == 'K') {
-            board[fline][fcolumn] = new King(board[line][column].color, board[line][column].state, fline, fcolumn, type);
+            board[fline][fcolumn] = new King(board[line][column].color, board[line][column].state, fline, fcolumn, type, board[line][column].count);
             if(board[line][column].color == 'B') {//atualiza a posicao do rei no tabuleiro
                 KingBranco[0] = fline;
                 KingBranco[1] = fcolumn;

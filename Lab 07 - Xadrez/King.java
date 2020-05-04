@@ -1,14 +1,131 @@
 public class King extends Pieces{ 
     
-    public King (char color, boolean state, int line, int column, char type) {
-        super(color, state, line, column, type);
+    public King (char color, boolean state, int line, int column, char type, int count) {
+        super(color, state, line, column, type, count);
     }
     boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype) {
         if (transforms) { //verifica se o movimento nao e do tipo transforms
             return false;
         }
         boolean v = true;
-        if((line-fline)*(line-fline)>1 || (column-fcolumn)*(column-fcolumn)>1) { //verifica se o rei anda uma casa
+
+        if ((count == 0 && line-fline == 0 && (column-fcolumn) * (column-fcolumn) == 4)) { //verifica se o rei anda duas casas para o lado e sua primeira jogada para o movimento ROQUE
+            v = checkCheck(line, column, chess, color); //verifica se o rei esta em cheque antes do movimento
+            if (!v) {
+                if (chess.board[line][column].color == 'B') {
+                    if (column-fcolumn<0) { // verifica se esta indo para a direita
+                        if (chess.board[0][7].state && chess.board[0][7].type == 't' && chess.board[0][7].count == 0) { //verifica se tem uma torre da mesma cor, que ainda nao se moveu
+                            for (int i = 1; i < 3; i++) {
+                                if (chess.board[0][column+i].state) {
+                                    return false;   
+                                }
+                                v = checkCheck(0, column+i, chess, color); //verifica se nenhuma casa vazia esta sob influencia de peca inimiga
+                                if (v) {
+                                    return false;
+                                }
+                            }
+                            v = checkCheck(0, 7, chess, color); //verifica se o rei nao estara em cheque apos o movimento;
+                            if (!v) {
+                                chess.moviment(0, 7, 0, 5, 't');
+                                chess.moviment(line, column, 0, 7, type);
+                                count++;
+                                return true;
+                            }
+                            else{
+                                return false;
+                            }
+                        } 
+                        else{
+                            return false;
+                        }   
+                    }
+                    else { //esta indo para a esquerda
+                        if (chess.board[0][0].state && chess.board[0][0].type == 't' && chess.board[0][0].count == 0) { //verifica se tem uma torre da mesma cor, que ainda nao se moveu
+                            for (int i = 1; i < 4; i++) {
+                                if (chess.board[0][column-i].state) {
+                                    return false;   
+                                }
+                                v = checkCheck(0, column-i, chess, color); //verifica se nenhuma casa vazia esta sob influencia de peca inimiga
+                                if (v) {
+                                    return false;
+                                }
+                            }
+                            v = checkCheck(0, 0, chess, color); //verifica se o rei nao estara em cheque apos o movimento;
+                            if (!v) {
+                                chess.moviment(0, 0, 0, 3, 't');
+                                chess.moviment(line, column, 0, 0, type);
+                                count++;
+                                return true;
+                            }
+                            else{
+                                return false;
+                            }
+                        } 
+                        else{
+                            return false;
+                        }
+                    }
+                }
+                if (chess.board[line][column].color == 'P') {
+                    if (column-fcolumn<0) { // verifica se esta indo para a direita
+                        if (chess.board[7][7].state && chess.board[7][7].type == 'T' && chess.board[7][7].count == 0) { //verifica se tem uma torre da mesma cor, que ainda nao se moveu
+                            for (int i = 1; i < 4; i++) {
+                                if (chess.board[7][column+i].state) {
+                                    return false;   
+                                }
+                                v = checkCheck(7, column+i, chess, color); //verifica se nenhuma casa vazia esta sob influencia de peca inimiga
+                                if (v) {
+                                    return false;
+                                }
+                            }
+                            v = checkCheck(7, 7, chess, color); //verifica se o rei nao estara em cheque apos o movimento;
+                            if (!v) {
+                                chess.moviment(7, 7, 7, 4, 'T');
+                                chess.moviment(line, column, 7, 7, type);
+                                count++;
+                                return true;
+                            }
+                            else{
+                                return false;
+                            }
+                        } 
+                        else{
+                            return false;
+                        }   
+                    }
+                    else { //esta indo para a esquerda
+                        if (chess.board[7][0].state && chess.board[7][0].type == 'T' && chess.board[7][0].count == 0) { //verifica se tem uma torre da mesma cor, que ainda nao se moveu
+                            for (int i = 1; i < 3; i++) {
+                                if (chess.board[7][column-i].state) {
+                                    return false;   
+                                }
+                                v = checkCheck(7, column-i, chess, color); //verifica se nenhuma casa vazia esta sob influencia de peca inimiga
+                                if (v) {
+                                    return false;
+                                }
+                            }
+                            v = checkCheck(7, 0, chess, color); //verifica se o rei nao estara em cheque apos o movimento;
+                            if (!v) {
+                                chess.moviment(7, 0, 7, 2, 'T');
+                                chess.moviment(line, column, 7, 0, type);
+                                count++;
+                                return true;
+                            }
+                            else{
+                                return false;
+                            }
+                        } 
+                        else{
+                            return false;
+                        }
+                    }
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        else if((line-fline)*(line-fline)>1 || (column-fcolumn)*(column-fcolumn)>1) { //verifica se o rei anda uma casa
             return false;
         } 
         if (chess.board[fline][fcolumn].state == true && chess.board[fline][fcolumn].color == color) { //verifica se o destino ha uma peca da mesma cor
@@ -16,6 +133,7 @@ public class King extends Pieces{
         }
         v = checkCheck(fline, fcolumn, chess, color); //checa se o movimento nao colocara o rei em xeque
         if (!v) {
+            count++;
             chess.moviment(line, column, fline, fcolumn, type);
             return true;
         }

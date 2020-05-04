@@ -1,7 +1,7 @@
 public class Horse extends Pieces{ 
     
-    public Horse (char color, boolean state, int line, int column, char type) {
-        super(color, state, line, column, type);
+    public Horse (char color, boolean state, int line, int column, char type, int count) {
+        super(color, state, line, column, type, count);
     }
     boolean checkMoviment(int fline, int fcolumn, Chessboard chess, boolean transforms, char newtype) {
         if (transforms) { //verifica se o movimento e do tipo transforma
@@ -19,6 +19,7 @@ public class Horse extends Pieces{
                 v =  chess.board[chess.KingPreto[0]][chess.KingPreto[1]].checkCheck(chess.KingPreto[0], chess.KingPreto[1], chess, chess.board[chess.KingPreto[0]][chess.KingPreto[1]].color);
             }
             if (!v) {
+                count++;
                 chess.moviment(line, column, fline, fcolumn, type);
                 return true;
             }
