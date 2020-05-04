@@ -23,7 +23,37 @@ public class Paw extends Pieces {
         }
         else if ((column - fcolumn)*(column - fcolumn) == (line - fline)*(line - fline) && (line - fline)*(line - fline) == 1) { //caso ande uma casa na diagonal
             if (chess.board[fline][fcolumn].state == false) { //caso nao haja peca
-                return false;
+                if (chess.board[line][column].color == 'B' && line == 4 && chess.board[fline-1][fcolumn].state && chess.board[fline-1][fcolumn].type == 'P' && chess.board[fline-1][fcolumn].count == 1) { //movimento En passant
+                    v = chess.board[chess.KingBranco[0]][chess.KingBranco[1]].checkCheck(chess.KingBranco[0], chess.KingBranco[1], chess, chess.board[chess.KingBranco[0]][chess.KingBranco[1]].color);
+                    if (!v) {
+                        chess.board[fline-1][fcolumn].type = '-';
+                        chess.board[fline-1][fcolumn].color = '-';
+                        chess.board[fline-1][fcolumn].state = false;
+                        count++;
+                        chess.moviment(line, column, fline, fcolumn, type);
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                if (chess.board[line][column].color == 'P' && line == 3 && chess.board[fline+1][fcolumn].state && chess.board[fline+1][fcolumn].type == 'P' && chess.board[fline+1][fcolumn].count == 1) { //movimento En passant
+                    v = chess.board[chess.KingPreto[0]][chess.KingPreto[1]].checkCheck(chess.KingPreto[0], chess.KingPreto[1], chess, chess.board[chess.KingPreto[0]][chess.KingPreto[1]].color);
+                    if (!v) {
+                        chess.board[fline+1][fcolumn].type = '-';
+                        chess.board[fline+1][fcolumn].color = '-';
+                        chess.board[fline+1][fcolumn].state = false;
+                        count++;
+                        chess.moviment(line, column, fline, fcolumn, type);
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    return false;
+                }
              }
         }
         else if ((column == fcolumn && (line - fline)*(line - fline) == 4)) {//caso ande duas casas para frente
@@ -36,9 +66,11 @@ public class Paw extends Pieces {
                 }
                 if (!v) {
                     if (transforms) {
+                        count++;
                         chess.moviment(line, column, fline, fcolumn, newtype);
                     } 
                     else{
+                        count++;
                         chess.moviment(line, column, fline, fcolumn, type);
                     }
                     count++;
@@ -60,14 +92,16 @@ public class Paw extends Pieces {
             v = chess.board[chess.KingBranco[0]][chess.KingBranco[1]].checkCheck(chess.KingBranco[0], chess.KingBranco[1], chess, chess.board[chess.KingBranco[0]][chess.KingBranco[1]].color);
         }
         else if (color == 'P') { //checa se o movimento nao colocara o rei em xeque
-            v =  chess.board[chess.KingPreto[0]][chess.KingPreto[1]].checkCheck(chess.KingPreto[0], chess.KingPreto[1], chess, chess.board[chess.KingPreto[0]][chess.KingPreto[1]].color);
+            v = chess.board[chess.KingPreto[0]][chess.KingPreto[1]].checkCheck(chess.KingPreto[0], chess.KingPreto[1], chess, chess.board[chess.KingPreto[0]][chess.KingPreto[1]].color);
         }
         if (!v) {
             count++;
             if (transforms) {
+                count++;
                 chess.moviment(line, column, fline, fcolumn, newtype);
             } 
             else{
+                count++;
                 chess.moviment(line, column, fline, fcolumn, type);
             }
             return true;
