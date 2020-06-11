@@ -22,7 +22,7 @@ public class Moviment extends Commands {
             source[1] = 6;
         } else if (ini.equals("h")) {
             source[1] = 7;
-        }
+        } 
 
         if (fim.equals("a")) {
             target[1] = 0;
