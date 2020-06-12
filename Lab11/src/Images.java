@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 public class Images extends JLabel implements ActionListener {
    Window window;
    int x;
-   public Images(String arquivoImagem, int width, int height, int x) {
-      super(new ImageIcon(arquivoImagem));
+   public Images(String image, int width, int height, int x) {
+      super(new ImageIcon(image));
       setSize(width, height);
       this.x = x;
    }
@@ -31,8 +31,8 @@ public class Images extends JLabel implements ActionListener {
 
    public void moveLeft() {
       window.removeImage(x);
-      if ((x == 0) || (x)%7 == 0) {
-         x += 6;
+      if (x%7 == 0) {
+         x+=6;
       } else {
          x--;
       }
@@ -40,7 +40,7 @@ public class Images extends JLabel implements ActionListener {
    }
    public void moveTop() {
       window.removeImage(x);
-      if (x<7) {
+      if (x < 7) {
             x+=42;
       } else {
             x-=7;
@@ -49,8 +49,8 @@ public class Images extends JLabel implements ActionListener {
     }
     public void moveBottom() {
       window.removeImage(x);
-      if (x>41) {
-         x -= 42;
+      if (x > 41) {
+         x-=42;
       } else{
          x+=7;
       }

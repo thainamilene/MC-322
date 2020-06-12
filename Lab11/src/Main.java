@@ -1,18 +1,19 @@
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main {
 
-     public static String diretorio = Main.class.getResource(".").getPath();
+     public static String directory = Main.class.getResource(".").getPath();
 
     public static void main(String[] args) {
         Window window = new Window();
 
         for (int i = 1; i < 49; i++) {
-            window.addFieldImage(new Images (diretorio + "field.png", 100, 100, 0));
+            window.addImage(new Images (directory + "field.png", 100, 100, 0));
         }
-        Images img = new Images (diretorio + "dog.png", 100, 100, 0); //<a href='https://www.freepik.com/free-photos-vectors/hand'>Hand vector created by freepik - www.freepik.com</a>
+        Images img = new Images (directory + "dog.png", 100, 100, 0); //<a href='https://www.freepik.com/free-photos-vectors/hand'>Hand vector created by freepik - www.freepik.com</a>
         window.addImage(img, 0);
         img.setWindow(window);
 
@@ -27,21 +28,11 @@ public class Main {
                 }
         );
 
-        JButton buttonLeft = new JButton("Esquerda");
-        window.addControl(buttonLeft);
-        buttonLeft.addActionListener(img);
+        StyleButton buttonStart = new StyleButton(directory + "start.png");
+        window.addControl(buttonStart);
 
-        JButton buttonRight = new JButton("Direita");
-        window.addControl(buttonRight);
-        buttonRight.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        img.moveRight();
-                    }
-                }
-        );
 
-        JButton buttonTop = new JButton("Cima");
+        StyleButton buttonTop = new StyleButton(directory + "Top.png");
         window.addControl(buttonTop);
         buttonTop.addActionListener(
                 new ActionListener() {
@@ -52,7 +43,14 @@ public class Main {
                 }
         );
 
-        JButton buttonBottom = new JButton("Embaixo");
+          StyleButton buttonStop = new StyleButton(directory + "stop.png");
+          window.addControl(buttonStop);
+
+        StyleButton buttonLeft = new StyleButton(directory + "Left.png");
+        window.addControl(buttonLeft);
+        buttonLeft.addActionListener(img);
+
+        StyleButton buttonBottom = new StyleButton(directory + "Bottom.png");
         window.addControl(buttonBottom);
         buttonBottom.addActionListener(
                 new ActionListener() {
@@ -62,10 +60,15 @@ public class Main {
                     }
                 }
         );
-
-
-        JButton buttonStart = new JButton("Inicia");
-        window.addControl(buttonStart);
+        StyleButton buttonRight = new StyleButton(directory + "Right.png");
+        window.addControl(buttonRight);
+        buttonRight.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        img.moveRight();
+                    }
+                }
+        );
 
         buttonStart.addActionListener(
                 new ActionListener() {
@@ -75,8 +78,6 @@ public class Main {
                 }
                 );
 
-          JButton buttonStop = new JButton("Para");
-          window.addControl(buttonStop);
 
           buttonStop.addActionListener(
              new ActionListener() {
